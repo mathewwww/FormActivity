@@ -55,57 +55,78 @@
         .wrap {
             width: 95%;
         }
-
+        
         #output_1 {
             color: red;
+            font-size: 13px;
         }
-
+        
         #output_2 {
             color: red;
+            font-size: 13px;
         }
-
+        
+        #myID {
+            color: green;
+            font-size: 13px;
+        }
     </style>
 
     <script language="JavaScript" type="text/javascript">
         function eightChara() {
             var eightLength = document.myForm.password.value;
-            
-            if(eightLength.length < 8){
+
+            if (eightLength.length < 8) {
                 document.getElementById("output_1").innerHTML = "Password must be at least 8 characters";
+            } else {
+                return true
             }
-
         }
 
-        function twentyOneCanYouDoSomeForMe(){
-            var currentYear = new Date().getFullYear();
-            var inputYear = document.myForm.bday.value;
+        function twentyOneCanYouDoSomeForMe() {
+            let date = new Date().getFullYear();
+            var br = document.myForm.bday.value;
 
-            
+            const myArray = br.split("-");
+            var inputYear = myArray[0];
 
-            if((currentYear - inputYear) <= 21) {
+            if ((date - inputYear) <= 21) {
                 document.getElementById("output_2").innerHTML = "Minors are not allowed!";
+            } else {
+                return true;
             }
         }
 
+        function allPassed() {
+            if (twentyOneCanYouDoSomeForMe() && eightChara() == true) {
+                document.getElementById("myID").innerHTML = "Hooray! Your account has been successfully created.";
+            }
+        }
+
+        function reSet() {
+            document.getElementById("myID").innerHTML = " ";
+            document.getElementById("output_2").innerHTML = " ";
+            document.getElementById("output_1").innerHTML = " ";
+        }
     </script>
 </head>
 
 <body>
     <div class="box">
-        <h1>Registration Form</h1>
-
         <form name="myForm">
-            First Name: <br><input class="wrap" type="text" name="firstname" /></br>
+            <h1>Registration Form</h1>
+            <span id="myID"></span> First Name: <br><input class="wrap" type="text" name="firstname" /></br>
             Last Name: <br><input class="wrap" type="text" name="lastname" /></br>
             Nick Name: <br><input class="wrap" type="text" name="nickname" /></br>
             Email: <br><input class="wrap" type="email" name="email" /></br>
-            Password <br><input class="wrap" type="password" name="password" id="passworD" /></br>
-            <span id="output_1"></span>
 
+            Password <br><input class="wrap" type="password" name="password" /></br>
+            <span id="output_1"></span>
+            <p style="font-size: 2px;"></p>
 
             Date of Birth: <br><input class="wrap" type="date" name="bday" /></br>
             <span id="output_2"></span>
-
+            <p style="font-size: 2px;"></p>
 
             Gender: <br><input type="radio" name="male" value="male" />
             <label for="male">Male</label>
@@ -113,9 +134,9 @@
             <label for="fale">Female</label>
             <input type="radio" name="other" value="other" />
             <label for="other">Other</label><br /> Mobile: <br><input class="wrap" type="tel" name="mobile" /></br>
-            Address: <br><textarea class="wrap" name="address" cols="25" rows="10" ></textarea></br>
-            <input type="button" name="submit" value="Submit" onclick="eightChara(), twentyOneCanYouDoSomeForMe()" />
-            <input type="reset" name="reset" value="Reset" />
+            Address: <br><textarea class="wrap" name="address" cols="25" rows="10"></textarea></br>
+            <input type="button" name="submit" value="Submit" onclick="eightChara(), twentyOneCanYouDoSomeForMe(), allPassed()" />
+            <input type="reset" name="reset" value="Reset" onclick="reSet()" />
         </form>
     </div>
 </body>
