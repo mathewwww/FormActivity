@@ -22,7 +22,7 @@
             margin-top: 5%;
         }
         
-        input[type="submit"] {
+        input[type="button"] {
             background-color: green;
             color: white;
             padding-left: 25px;
@@ -55,28 +55,66 @@
         .wrap {
             width: 95%;
         }
+
+        #output_1 {
+            color: red;
+        }
+
+        #output_2 {
+            color: red;
+        }
+
     </style>
+
+    <script language="JavaScript" type="text/javascript">
+        function eightChara() {
+            var eightLength = document.myForm.password.value;
+            
+            if(eightLength.length < 8){
+                document.getElementById("output_1").innerHTML = "Password must be at least 8 characters";
+            }
+
+        }
+
+        function twentyOneCanYouDoSomeForMe(){
+            var currentYear = new Date().getFullYear();
+            var inputYear = document.myForm.bday.value;
+
+            
+
+            if((currentYear - inputYear) <= 21) {
+                document.getElementById("output_2").innerHTML = "Minors are not allowed!";
+            }
+        }
+
+    </script>
 </head>
 
 <body>
     <div class="box">
         <h1>Registration Form</h1>
 
-        <form>
-            First Name: <br><input class="wrap" type="text" name="firstname" required/></br>
-            Last Name: <br><input class="wrap" type="text" name="lastname" required/></br>
-            Nick Name: <br><input class="wrap" type="text" name="nickname" required/></br>
-            Email: <br><input class="wrap" type="email" name="email" required/></br>
-            Password <br><input class="wrap" type="password" name="password" required/></br>
-            Date of Birth: <br><input class="wrap" type="date" name="bday" required/></br>
+        <form name="myForm">
+            First Name: <br><input class="wrap" type="text" name="firstname" /></br>
+            Last Name: <br><input class="wrap" type="text" name="lastname" /></br>
+            Nick Name: <br><input class="wrap" type="text" name="nickname" /></br>
+            Email: <br><input class="wrap" type="email" name="email" /></br>
+            Password <br><input class="wrap" type="password" name="password" id="passworD" /></br>
+            <span id="output_1"></span>
+
+
+            Date of Birth: <br><input class="wrap" type="date" name="bday" /></br>
+            <span id="output_2"></span>
+
+
             Gender: <br><input type="radio" name="male" value="male" />
             <label for="male">Male</label>
             <input type="radio" name="female" value="female" />
             <label for="fale">Female</label>
             <input type="radio" name="other" value="other" />
-            <label for="other">Other</label><br /> Mobile: <br><input class="wrap" type="tel" name="mobile" required/></br>
-            Address: <br><textarea class="wrap" name="address" cols="25" rows="10" required></textarea></br>
-            <input type="submit" name="submit" value="Submit" />
+            <label for="other">Other</label><br /> Mobile: <br><input class="wrap" type="tel" name="mobile" /></br>
+            Address: <br><textarea class="wrap" name="address" cols="25" rows="10" ></textarea></br>
+            <input type="button" name="submit" value="Submit" onclick="eightChara(), twentyOneCanYouDoSomeForMe()" />
             <input type="reset" name="reset" value="Reset" />
         </form>
     </div>
